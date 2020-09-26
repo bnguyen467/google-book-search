@@ -21,15 +21,18 @@ const Saved = () => {
 
   return (
     <>
-      <h1>Your saved Books</h1>
+      <h1>Your saved novels</h1>
       {savedState.saved.length > 0
         ? savedState.saved.map((book) => (
-            <div key={book.title}>
+            <div key={book.apiId}>
               <img src={book.image} alt={book.title} />
-              <h3>{book.title}</h3>
-              <h4>Authors: {book.authors}</h4>
-              <h4>Description: {book.description}</h4>
-              <h5>Link: {book.link}</h5>
+              <hr />
+              <h3>Title: {book.title}</h3>
+              <h4>Author(s): {book.authors}</h4>
+              <h5>Description: {book.description}</h5>
+              <a href={book.link}>
+                <button>View More</button>
+              </a>
               <button onClick={() => savedState.handleDeleteSaved(book._id)}>
                 Delete
               </button>

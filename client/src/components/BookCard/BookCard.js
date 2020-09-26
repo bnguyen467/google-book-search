@@ -23,31 +23,31 @@ const BookCard = (props) => {
     <Card className={classes.root}>
       <CardMedia
         className={classes.media}
-        image={props.media.image}
-        title={props.media.title}
+        image={props.books.image}
+        title={props.books.title}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="h2">
-          {props.media.title}
+          {props.books.title}
         </Typography>
 
         <Typography variant="body2" color="textSecondary" component="p">
-          Authors: {props.media.authors}
+          Authors: {props.books.authors}
         </Typography>
 
         <Typography variant="body2" color="textSecondary" component="p">
-          Description: {props.media.description}
+          Description: {props.books.description}
         </Typography>
 
         <Typography variant="body2" color="textSecondary" component="p">
-          link: {props.media.link}
+          Link: {props.books.link}
         </Typography>
       </CardContent>
       <CardActions>
         <Button
           size="small"
           color="primary"
-          onClick={() => props.handleSaveBook(props.media.title)}
+          onClick={() => props.handleSaveBook(props.books.bookID)}
         >
           Save
         </Button>

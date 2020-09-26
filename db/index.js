@@ -4,5 +4,6 @@ module.exports = require("mongoose").connect(
     useNewUrlParser: true,
     useFindAndModify: true,
     useUnifiedTopology: true,
+    useCreateIndex: true,
   }
 );

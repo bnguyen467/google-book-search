@@ -36,7 +36,7 @@ const Navbar = () => {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" className={classes.title}>
-          Google Book Search
+          Movie/TV Search
         </Typography>
         <Link to="/" className={classes.link}>
           <Button color="inherit">Home</Button>

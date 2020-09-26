@@ -2,34 +2,39 @@ const router = require("express").Router();
 const axios = require("axios");
 const { Book } = require("../models");
 
-router.get("/title/:search", (req, res) => {
+router.get("/books/:search", (req, res) => {
   axios
-    .get(
-      `https://www.googleapis.com/books/v1/volumes?q=${req.params.search}&key=AIzaSyBymPl16bOUFmiR-v5bkW_LX1hphskppGE`
-    )
+    .get(`https://www.googleapis.com/books/v1/volumes?q=${req.params.search}`)
     .then(({ data }) => {
+      let bigBook = data.items;
+
+      // bigBook.map((book) => ({
+      //   title: book.volumeInfo.title,
+      //   authors: book.volumeInfo.authors,
+      //   description: book.volumeInfo.description,
+      //   image: book.volumeInfo.imageLinks.thumbnail,
+      //   link: book.volumeInfo.infoLink,
+      //   apiId: book.id,
+      // }));
+
       let books = [];
-      let bookData = data.items;
-      bookData.forEach((element) => {
+
+      bigBook.forEach((element) => {
         let bookInfo = element.volumeInfo;
-        let bookData = {
+        let object = {
           title: bookInfo.title,
           authors: bookInfo.authors,
           description: bookInfo.description,
           image: bookInfo.imageLinks.thumbnail,
           link: bookInfo.infoLink,
+          apiId: element.id,
         };
-        books.push(bookData);
+
+        books.push(object);
       });
+      // console.log(books);
+      res.json(books);
     })
-    .then((apiBook) =>
-      Book.find().then((element) =>
-        apiBook.filter((data) =>
-          element.every((dbData) => dbData.title !== data.title)
-        )
-      )
-    )
-    .then((element) => res.json(element))
     .catch((err) => console.log(err));
 });
 
